@@ -4,7 +4,7 @@
             "name": "CUDA C++: Launch",
             "type": "cuda-gdb",
             "request": "launch",
-            "preLaunchTask": "Build with CUDA",
+            "preLaunchTask": "Build Current File With CUDA",
             "program": "${fileDirname}/${fileBasenameNoExtension}.elf"
         }
         

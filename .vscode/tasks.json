@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build with CUDA",
+            "label": "Build Current File With CUDA",
             "type": "shell",
             "command": "nvcc",
             "problemMatcher": [
@@ -12,31 +12,28 @@
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}.elf",
-                "-g", // Add debug information
-                "-G" // Generate device code suitable for debugging
+                "-g",
+                "-G"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
             "presentation": {
                 "reveal": "silent",
                 "panel": "shared"
             }
         },
         {
-            "label": "Run",
+            "label": "Build & Run Current File",
             "type": "shell",
             "command": "${fileDirname}/${fileBasenameNoExtension}.elf",
             "dependsOn": "Build with CUDA",
             "group": {
-                "kind": "test",
+                "kind": "build",
                 "isDefault": true
             },
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
-            }
+            },
+            "problemMatcher": []
         }
     ]
 }
