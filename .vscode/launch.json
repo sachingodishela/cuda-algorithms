@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "CUDA C++: Launch",
+            "type": "cuda-gdb",
+            "request": "launch",
+            "preLaunchTask": "Build with CUDA",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.elf"
+        }
+        
+    ]
+}   
