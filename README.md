@@ -3,7 +3,7 @@ GPU utilized parallel algorithms for numerical methods and scientific computing.
 
 ## How to run
 1. Checkout this repository and open in Visual Studio Code:
-```
+``` sh
 git clone git@github.com:sachingodishela/cuda-algorithms.git
 cd cuda-algorithms
 code .
