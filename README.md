@@ -1,4 +1,7 @@
 # cuda-algorithms
+[![CI](https://github.com/sachingodishela/cuda-algorithms/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sachingodishela/cuda-algorithms/actions/workflows/ci.yml)
+
+
 GPU utilized parallel algorithms for numerical methods and scientific computing.
 
 ## How to run
