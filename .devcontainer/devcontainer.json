@@ -1,0 +1,19 @@
+{
+    "name": "cuda-algorithms",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "hostRequirements": {
+        "gpu": true
+    },
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "GitHub.copilot",
+                "GitHub.copilot-chat"
+            ]
+        }
+    }
+}

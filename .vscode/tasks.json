@@ -24,7 +24,7 @@
             "label": "Build & Run Current File",
             "type": "shell",
             "command": "${fileDirname}/${fileBasenameNoExtension}.elf",
-            "dependsOn": "Build with CUDA",
+            "dependsOn": "Build Current File With CUDA",
             "group": {
                 "kind": "build",
                 "isDefault": true
