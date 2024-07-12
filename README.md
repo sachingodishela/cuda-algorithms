@@ -2,7 +2,7 @@
 [![CI](https://github.com/sachingodishela/cuda-algorithms/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sachingodishela/cuda-algorithms/actions/workflows/ci.yml)
 
 
-GPU utilized parallel algorithms for numerical methods and scientific computing.
+GPU utilized parallel algorithms for numerical methods and scientific computing. Each root level folder in this repository contains an algorithm and few examples using that algorithm.
 
 ## How to run
 1. Checkout this repository and open in Visual Studio Code:
