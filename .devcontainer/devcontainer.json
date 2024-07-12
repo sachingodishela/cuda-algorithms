@@ -1,7 +1,19 @@
 {
     "name": "cuda-algorithms",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
     "hostRequirements": {
         "gpu": true
     },
-    "image": "nvidia/cuda:12.5.0-runtime-ubuntu22.04"
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "GitHub.copilot",
+                "GitHub.copilot-chat"
+            ]
+        }
+    }
 }
