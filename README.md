@@ -24,6 +24,7 @@ Just raise a PR and I'll take a look. Keep these in mind while developing:
 ## Changelog
 |Date|Time|Author|Change|
 |-|-|-|-|
+12-July-2024|20:09|[@sachingodishela](https://github.com/sachingodishela)|Dev Container Support & Run hello-cuda in CI.|
 11-July-2024|18:27|[@sachingodishela](https://github.com/sachingodishela)|Update README with setup and build instructions.|
 11-July-2024|18:08|[@sachingodishela](https://github.com/sachingodishela)|Added vscode configs for building, running and debugging the files in linux environment. Added first program "hello-cuda" which prints avaiable GPUs and their properties.|
 11-July-2024|16:37|[@sachingodishela](https://github.com/sachingodishela)|Created this repository.|
