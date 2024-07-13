@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: NVIDIA Config
-      run: nvidia-smi && nvcc hello-cuda/main.cu -o hello-cuda/main.elf && hello-cuda/main.elf && nvcc vector/add.cu -o vector/add.elf && vector/add.elf
+      run: nvidia-smi && nvcc hello-cuda/main.cu -o hello-cuda/main.elf && hello-cuda/main.elf && nvcc vector/add.cu -arch compute_50 -o vector/add.elf && vector/add.elf
