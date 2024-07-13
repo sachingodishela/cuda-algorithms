@@ -66,7 +66,7 @@ int main() {
     int iteration = 0;
     int MAX_THREADS_PER_BLOCK = 1024;
     int MAX_BLOCKS = 32;
-    while (0 < vectorSize && vectorSize < ULONG_LONG_MAX) {
+    while (0 < vectorSize && iteration < 29) {
         std::cout << "vectorSize: " << vectorSize << ", "; 
         size_t memorySize = vectorSize * sizeof(float);
         std::vector<float> A(vectorSize);
