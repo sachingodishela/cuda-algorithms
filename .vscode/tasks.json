@@ -12,6 +12,8 @@
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}.elf",
+                "-arch",
+                "compute_50",
                 "-g",
                 "-G"
             ],
