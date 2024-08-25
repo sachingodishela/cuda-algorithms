@@ -5,7 +5,17 @@
             "type": "cuda-gdb",
             "request": "launch",
             "preLaunchTask": "Build Current File With CUDA",
-            "program": "${fileDirname}/${fileBasenameNoExtension}.elf"
+            "program": "${fileDirname}/${fileBasenameNoExtension}.elf",
+            "environment": [
+                // {
+                //     "name": "CUDBG_USE_LEGACY_DEBUGGER",
+                //     "value": "1"
+                // },
+                // {
+                //     "name": "_CUDA_DEBUGGER_SOFTWARE_PREEMPTION",
+                //     "value": "1"
+                // }
+            ]
         }
         
     ]
