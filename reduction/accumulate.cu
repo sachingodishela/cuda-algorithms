@@ -11,8 +11,9 @@ Data _initialize_data(unsigned long long int &s)
     Data data(s);
     data.cpu = (float *)malloc(s * sizeof(float));
     data.cpu[0] = 0;
-    for (unsigned long long int i = 1; i < s; i++) {
-        data.cpu[i] = data.cpu[i-1] + 0.00069;
+    for (unsigned long long int i = 1; i < s; i++)
+    {
+        data.cpu[i] = data.cpu[i - 1] + 0.00069;
     }
     size_t memorySize = s * sizeof(float);
     cudaError_t err = cudaMalloc(&data.gpu, memorySize);
@@ -22,6 +23,7 @@ Data _initialize_data(unsigned long long int &s)
         throw std::overflow_error(s.c_str());
         return 0;
     }
+    cudaMemcpy(data.gpu, data.cpu, memorySize, cudaMemcpyHostToDevice);
     return data;
 }
 
@@ -37,23 +39,21 @@ void _destroy_data(Data &d)
 float cpu_basic(Data data)
 {
     auto tic = std::chrono::steady_clock::now();
-    // std::cout << "cpu result: ";
     double solution = 0;
     for (int i = 0; i < data.s; i++)
     {
         solution += data.cpu[i];
     }
-    // std::cout << solution << std::endl;
-    return solution;
-    // auto toc = std::chrono::steady_clock::now();
-    // return std::chrono::duration_cast<std::chrono::seconds>(toc - tic).count();
+    auto toc = std::chrono::steady_clock::now();
+    return std::chrono::duration_cast<std::chrono::milliseconds>(toc - tic).count();
 }
 
 // kernel which executes on GPU parallely
-__global__ void accumulate(float* data, unsigned long long int stride)
+__global__ void accumulate(float *data, unsigned long long int stride)
 {
     int i = blockIdx.x * 1024 + threadIdx.x;
-    if (i < stride) {
+    if (i < stride)
+    {
         data[i] = data[i] + data[stride + i];
     }
 }
@@ -68,7 +68,7 @@ float gpu_basic(Data data)
     cudaDeviceProp prop;
     cudaGetDeviceProperties(&prop, 0);
     int MAX_THREADS_PER_BLOCK = prop.maxThreadsPerBlock;
-    for (unsigned long long int i = data.s/2; i >= 1; i=i/2)
+    for (unsigned long long int i = data.s / 2; i >= 1; i = i / 2)
     {
         int numBlocks = (i / MAX_THREADS_PER_BLOCK) + (i % MAX_THREADS_PER_BLOCK ? 1 : 0);
         int numThreadsPerBlock = numBlocks > 1 ? MAX_THREADS_PER_BLOCK : i;
@@ -83,16 +83,14 @@ float gpu_basic(Data data)
         cudaDeviceSynchronize();
     }
     float sum = 0;
-    cudaMemcpy(&sum, data.gpu, 1, cudaMemcpyDeviceToHost);
-    return sum;
-    // std::cout << "gpu result: " << sum << std::endl;
-    // auto toc = std::chrono::steady_clock::now();
-    // return std::chrono::duration_cast<std::chrono::seconds>(toc - tic).count();
+    cudaMemcpy(&sum, data.gpu, sizeof(float), cudaMemcpyDeviceToHost);
+    auto toc = std::chrono::steady_clock::now();
+    return std::chrono::duration_cast<std::chrono::milliseconds>(toc - tic).count();
 }
 
 int main()
 {
-    for (unsigned long long int s = 1; s <= 2e8; s *= 2)
+    for (unsigned long long int s = 1; s <= 2e12; s *= 2)
     {
         Data data = _initialize_data(s);
         auto cpu_result = cpu_basic(data);

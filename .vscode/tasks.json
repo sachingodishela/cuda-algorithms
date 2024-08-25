@@ -11,7 +11,7 @@
             "args": [
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.elf",
+                "${fileDirname}/${fileBasenameNoExtension}",
                 "-arch",
                 "compute_50",
                 "-g",
@@ -25,7 +25,7 @@
         {
             "label": "Build & Run Current File",
             "type": "shell",
-            "command": "${fileDirname}/${fileBasenameNoExtension}.elf",
+            "command": "${fileDirname}/${fileBasenameNoExtension}",
             "dependsOn": "Build Current File With CUDA",
             "group": {
                 "kind": "build",
