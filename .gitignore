@@ -4,3 +4,6 @@
 *.elf
 build
 *.exe
+.vs
+*.ilk
+*.pdb

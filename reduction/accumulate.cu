@@ -20,6 +20,7 @@ Data _initialize_data(unsigned long long int &s)
     {
         std::string s = cudaGetErrorString(err);
         throw std::overflow_error(s.c_str());
+        return 0;
     }
     return data;
 }
@@ -37,7 +38,7 @@ float cpu_basic(Data data)
 {
     auto tic = std::chrono::steady_clock::now();
     // std::cout << "cpu result: ";
-    double solution;
+    double solution = 0;
     for (int i = 0; i < data.s; i++)
     {
         solution += data.cpu[i];
@@ -67,12 +68,12 @@ float gpu_basic(Data data)
     cudaDeviceProp prop;
     cudaGetDeviceProperties(&prop, 0);
     int MAX_THREADS_PER_BLOCK = prop.maxThreadsPerBlock;
-    for (unsigned long long int i = data.s/2; i >= 1; i--)
+    for (unsigned long long int i = data.s/2; i >= 1; i=i/2)
     {
         int numBlocks = (i / MAX_THREADS_PER_BLOCK) + (i % MAX_THREADS_PER_BLOCK ? 1 : 0);
         int numThreadsPerBlock = numBlocks > 1 ? MAX_THREADS_PER_BLOCK : i;
         dim3 threadsPerBlock(numThreadsPerBlock);
-        accumulate<<<numBlocks, threadsPerBlock>>>(data.gpu, data.s);
+        accumulate<<<numBlocks, threadsPerBlock>>>(data.gpu, i);
         cudaError_t err = cudaGetLastError();
         if (err != cudaSuccess)
         {
@@ -81,7 +82,7 @@ float gpu_basic(Data data)
         }
         cudaDeviceSynchronize();
     }
-    float sum;
+    float sum = 0;
     cudaMemcpy(&sum, data.gpu, 1, cudaMemcpyDeviceToHost);
     return sum;
     // std::cout << "gpu result: " << sum << std::endl;
@@ -97,5 +98,6 @@ int main()
         auto cpu_result = cpu_basic(data);
         auto gpu_result = gpu_basic(data);
         std::cout << "s: " << s << ", cpu_basic: " << cpu_result << ", gpu_basic: " << gpu_result << std::endl;
+        _destroy_data(data);
     }
 }

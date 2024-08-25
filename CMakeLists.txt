@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.30 FATAL_ERROR)
 project(cuda-algorithms LANGUAGES CXX CUDA)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CUDA_FLAGS "-arch=sm_50")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -G -g -0")
+endif()
+
 function(add_cuda_executable target_name source_file)
     add_executable(${target_name} ${source_file})
 endfunction()
