@@ -1,10 +1,12 @@
+// update-initramfs -u -k all
+// above command to enable GPU profiling
 #include <cuda_runtime.h>
 #include <vector>
 #include <iostream>
 #include <chrono>
 #include <stdexcept>
 #include "../benchmark/benchmark.h"
-#define MAX_VECTOR_DIMENSIONS 134217728
+#define MAX_VECTOR_DIMENSIONS 134217728*4
 
 Data _initialize_data(unsigned long long int &s)
 {
@@ -20,7 +22,7 @@ Data _initialize_data(unsigned long long int &s)
     if (err != cudaSuccess)
     {
         std::string s = cudaGetErrorString(err);
-        throw std::overflow_error(s.c_str());
+        std::__throw_out_of_range(s.c_str());
         return 0;
     }
     cudaMemcpy(data.gpu, data.cpu, memorySize, cudaMemcpyHostToDevice);

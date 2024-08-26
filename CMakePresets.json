@@ -1,0 +1,51 @@
+{
+    "version": 8,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 30,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "hidden": false,
+            "description": "Default configuration",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "OFF",
+                "CMAKE_VERBOSE_MAKEFILE": "OFF"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release configure preset",
+            "description": "Sets Ninja generator, build and install directory",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CUDA_FLAGS": "-arch=sm_50"
+            }
+        },
+        {
+            "name": "debug",
+            "displayName": "Debug configure preset",
+            "description": "Sets Ninja generator, build and install directory",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CUDA_FLAGS": "-arch=sm_50 -G -g"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "description": "",
+            "displayName": "",
+            "configurePreset": "default"
+        }
+    ]
+}

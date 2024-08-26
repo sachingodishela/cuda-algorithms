@@ -48,5 +48,19 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled",
+    "cmake.debugConfig": {
+        "miDebuggerPath": "/usr/local/cuda-11.8/bin/cuda-gdb",
+        "environment": [
+            {
+                "name": "CUDBG_USE_LEGACY_DEBUGGER",
+                "value": "1"
+            },
+            {
+                "name": "CUDA_DEBUGGER_SOFTWARE_PREEMPTION",
+                "value": "1"
+            }
+        ]
     }
 }

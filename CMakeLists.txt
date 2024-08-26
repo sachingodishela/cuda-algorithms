@@ -1,16 +1,5 @@
 cmake_minimum_required(VERSION 3.30 FATAL_ERROR)
 project(cuda-algorithms LANGUAGES CXX CUDA)
-set(CMAKE_VERBOSE_MAKEFILE ON)
-set(CMAKE_CUDA_FLAGS "-arch=sm_50")
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -G -g -0")
-endif()
-
-function(add_cuda_executable target_name source_file)
-    add_executable(${target_name} ${source_file})
-endfunction()
 
 file(GLOB SUBDIRS RELATIVE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/*)
 
@@ -19,8 +8,8 @@ foreach(subdir ${SUBDIRS})
         file(GLOB CU_FILES RELATIVE ${CMAKE_SOURCE_DIR}/${subdir} ${CMAKE_SOURCE_DIR}/${subdir}/*.cu)
         foreach(cu_file ${CU_FILES})
             get_filename_component(target_name ${cu_file} NAME_WE)
-            add_cuda_executable(${target_name} ${CMAKE_SOURCE_DIR}/${subdir}/${cu_file})
-            set_target_properties(${target_name} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/${subdir}")
+            add_executable(${target_name} ${CMAKE_SOURCE_DIR}/${subdir}/${cu_file})
+            # set_target_properties(${target_name} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/${subdir}")
         endforeach()
     endif()
 endforeach()
