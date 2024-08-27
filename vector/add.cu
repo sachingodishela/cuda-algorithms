@@ -7,10 +7,10 @@
 #else
 #include <unistd.h>
 #endif
-
 #include<stdlib.h>
 #include<vector>
 #include<chrono>
+
 
 __global__ void addVectors (float* A, float* B, unsigned long long int* vectorSize) {
     int i = blockIdx.x * 1024 + threadIdx.x;
@@ -27,7 +27,6 @@ __global__ void addVectors (float* A, float* B, unsigned long long int* vectorSi
 std::vector<float*> createHostPointers (unsigned long long int &vectorSize) {
     float* A;
     float* B;
-    float* C;
     A = (float*)malloc(vectorSize * sizeof(float));
     B = (float*)malloc(vectorSize * sizeof(float));
     for (unsigned long long int i = 0; i < vectorSize; i++) {
